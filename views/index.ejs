@@ -2,10 +2,27 @@
 <html>
   <head>
     <title><%= title %></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,900italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Sanchez' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <h1 class="title"><%= title %></h1>
+    <div class='howTo'>Create a custom SXSW itinerary using OneNightBand.</div>
+    <div class="here">It starts here.</div>
+    <section class="show">
+    </section>
+    <input type="image" src="http://localhost:3000/images/x.png" class='x button stop'>
+    <a href="#openModal"><input type="image" src="http://localhost:3000/images/heart.png" class='heart button' id='heart'></a>
+    <div id="openModal" class="modalWindow">
+    <div>
+            <h2 class='modalText'>This show was added to your itinerary!</h2>
+            <a href="#ok" class="ok">Awesome!</a>
+    </div>
+</div>
+    <script src="/javascripts/shows.js" type="text/javascript" charset="utf-8" async defer></script>
+
   </body>
 </html>
