@@ -42,12 +42,13 @@ $(function() {
         event.forEach(function(i) {
             var event = i;
             var performance = event.performance;
-            for (var i = 1; i < performance.length; i++) {
+            for (var i = 0; i < performance.length; i++) {
                 var show = performance[i];
             }
             performance.forEach(function(j) {
                 var performance = j;
                 var artist = performance.artist.displayName;
+                console.log(artist);
                 var venue = event.venue.displayName;
                 var date = event.start.date;
                 var time = event.start.time;
@@ -89,10 +90,11 @@ $(function() {
             var shows = data;
             displayShow(shows);
             var i = 1;
+            var index;
             //on click of x move to the next event
             $('.x').on('click', function() {
                 if (i <= 99) {
-                    var index = i++;
+                    index = i++;
                 } else
                     return;
                 var event = shows.resultsPage.results.event[index];
@@ -128,42 +130,22 @@ $(function() {
 
             //on click of x move to the next event
             $('.heart').on('click', function() {
-
-
-                if (i <= 99) {
-                    var index = i++;
-                } else
-                    return;
-                var event = shows.resultsPage.results.event[index];
+                var count = i;
+                var event = shows.resultsPage.results.event[count];
                 var artist = event.performance[0].artist.displayName;
                 var venue = event.venue.displayName;
                 var date = event.start.date;
                 var time = event.start.time;
                 var songkick = event.performance[0].artist.uri;
-                event = shows.resultsPage.results.event[i];
-                if (date) {
-                    date = date.replace(/(\d{4})-(\d{1,2})-(\d{1,2})/, function(match, y, m, d) {
-                        return m + '/' + d + '/' + y;
-                    });
-                }
-
-                $('.show').html('<a class="who link" href="' + songkick + '<h2 class="who link">' + artist + '</h2></a>');
-                $('.show').append('<h3 class="where"> at ' + venue + '</h3>');
-                if (time === null) {
-                    $('.show').append('<h4 class="when">' + date + ' at TBA </h4>');
-
-                }
-                if (time) {
-                    var newTime = time.split(':');
-                    var hours = Number(newTime[0]);
-                    var minutes = Number(newTime[1]);
-                    var timeValue = "" + ((hours > 12) ? hours - 12 : hours); // get hours
-                    timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes; // get minutes
-                    timeValue += (hours >= 12) ? " P.M." : " A.M."; // get AM/PM
-                    $('.show').append('<h4 class="when">' + date + ' at ' + timeValue + '</h4>');
-                }
-
+                // $('.modal').html('<h2 class="modalText">' + artist + ' at ' + venue + ' was added to your itinerary </h2><a href="#ok" class="ok">Awesome!</a>')
             })
+
+            $('.ok').on(function(artist, venue) {
+                console.log(artist, venue);
+            });
+
+
+
         })
         .always(function(data) {
 
