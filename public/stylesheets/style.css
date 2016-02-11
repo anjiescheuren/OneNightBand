@@ -60,6 +60,8 @@ h1 {
   font-style: italic;
   color: #4DCFB5;
   font-size: 22.8px;
+  margin: 0 auto;
+  padding-bottom: 15px;
 }
 
 .ok {
