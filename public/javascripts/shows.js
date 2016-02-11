@@ -1,5 +1,5 @@
 $(function() {
-    var apiRoot = 'http://api.songkick.com/api/3.0/events.json?location=geo:30.2669444,-97.7427778&min_date=2016-03-15&max_date=2016-03-20&apikey=PTAZie3wbuF6n5dx';
+    var apiRoot = 'http://api.songkick.com/api/3.0/events.json?location=geo:30.2669444,-97.7427778&per_page=100&min_date=2016-03-15&max_date=2016-03-20&apikey=PTAZie3wbuF6n5dx';
 
     //show one arist, venue, date and time on the page to begin with
     function displayShow(shows) {
@@ -16,7 +16,7 @@ $(function() {
             });
         }
 
-        $('.show').html('<h2 class="who">' + artist + '</h2>');
+        $('.show').html('<a class="who link" href="' + songkick + '<h2 class="who link">' + artist + '</h2></a>');
         $('.show').append('<h3 class="where"> at ' + venue + '</h3>');
         if (time === null) {
             $('.show').append('<h4 class="when">' + date + ' at TBA </h4>');
@@ -30,7 +30,7 @@ $(function() {
             timeValue += (hours >= 12) ? " P.M." : " A.M."; // get AM/PM
             $('.show').append('<h4>' + date + ' at ' + timeValue + '</h4>');
         }
-        $('.show').append('<a href="' + songkick + '"<h4 class="link">' + artist + '\'s Songkick</h4></a>');
+
     }
 
     var displayShows = function(shows) {
@@ -59,7 +59,7 @@ $(function() {
                     });
                 }
 
-                $('.show').html('<h2>' + artist + '</h2>');
+                $('.show').html('<a class="who link" href="' + songkick + '<h2 class="who link">' + artist + '</h2></a>');
                 $('.show').append('<h3> at ' + venue + '</h3>');
                 if (time === null) {
                     $('.show').append('<h4>' + date + ' at TBA </h4>');
@@ -74,7 +74,7 @@ $(function() {
                     timeValue += (hours >= 12) ? " P.M." : " A.M."; // get AM/PM
                     $('.show').append('<h4>' + date + ' at ' + timeValue + '</h4>');
                 }
-                $('.show').append('<a href="' + songkick + '"<h4 class="link">' + artist + '\'s Songkick</h4></a>');
+
             })
         });
     }
@@ -91,7 +91,7 @@ $(function() {
             var i = 1;
             //on click of x move to the next event
             $('.x').on('click', function() {
-                if (i <= 49) {
+                if (i <= 99) {
                     var index = i++;
                 } else
                     return;
@@ -108,7 +108,7 @@ $(function() {
                     });
                 }
 
-                $('.show').html('<h2 class="who">' + artist + '</h2>');
+                $('.show').html('<a class="who link" href="' + songkick + '<h2 class="who link">' + artist + '</h2></a>');
                 $('.show').append('<h3 class="where"> at ' + venue + '</h3>');
                 if (time === null) {
                     $('.show').append('<h4 class="when">' + date + ' at TBA </h4>');
@@ -123,14 +123,14 @@ $(function() {
                     timeValue += (hours >= 12) ? " P.M." : " A.M."; // get AM/PM
                     $('.show').append('<h4 class="when">' + date + ' at ' + timeValue + '</h4>');
                 }
-                $('.show').append('<a href="' + songkick + '"<h4 class="link">' + artist + '\'s Songkick</h4></a>');
+
             })
 
             //on click of x move to the next event
             $('.heart').on('click', function() {
 
 
-                if (i <= 49) {
+                if (i <= 99) {
                     var index = i++;
                 } else
                     return;
@@ -147,7 +147,7 @@ $(function() {
                     });
                 }
 
-                $('.show').html('<h2 class="who">' + artist + '</h2>');
+                $('.show').html('<a class="who link" href="' + songkick + '<h2 class="who link">' + artist + '</h2></a>');
                 $('.show').append('<h3 class="where"> at ' + venue + '</h3>');
                 if (time === null) {
                     $('.show').append('<h4 class="when">' + date + ' at TBA </h4>');
@@ -162,7 +162,7 @@ $(function() {
                     timeValue += (hours >= 12) ? " P.M." : " A.M."; // get AM/PM
                     $('.show').append('<h4 class="when">' + date + ' at ' + timeValue + '</h4>');
                 }
-                $('.show').append('<a href="' + songkick + '"<h4 class="link">' + artist + '\'s Songkick</h4></a>');
+
             })
         })
         .always(function(data) {
