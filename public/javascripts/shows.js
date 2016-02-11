@@ -3,7 +3,7 @@ $(function() {
 
     //show one arist, venue, date and time on the page to begin with
     function displayShow(shows) {
-        for (var i = 0; i < shows.length; i++);
+        var i = 0;
         var event = shows.resultsPage.results.event[i];
         var artist = event.performance[0].artist.displayName;
         var venue = event.venue.displayName;
@@ -49,7 +49,6 @@ $(function() {
             performance.forEach(function(j) {
                 var performance = j;
                 var artist = performance.artist.displayName;
-                console.log(artist);
                 var venue = event.venue.displayName;
                 var date = event.start.date;
                 var time = event.start.time;
@@ -88,23 +87,20 @@ $(function() {
             dataType: "json"
         })
         .done(function(data) {
-            var shows = data;
+            var shows = data.resultsPage.results.event;
             displayShow(shows);
-            var i = 0;
-            var index = i++;
             //on click of x move to the next event
             $('.x').on('click', function() {
                 if (i <= 99) {
                     index = i++;
                 } else
                     return;
-                var event = shows.resultsPage.results.event[i];
+                var event = shows[i];
                 var artist = event.performance[0].artist.displayName;
                 var venue = event.venue.displayName;
                 var date = event.start.date;
                 var time = event.start.time;
                 var songkick = event.performance[0].artist.uri;
-                event = shows.resultsPage.results.event[i];
                 if (date) {
                     date = date.replace(/(\d{4})-(\d{1,2})-(\d{1,2})/, function(match, y, m, d) {
                         return m + '/' + d + '/' + y;
@@ -126,53 +122,36 @@ $(function() {
                     timeValue += (hours >= 12) ? " P.M." : " A.M."; // get AM/PM
                     $('.show').append('<h4 class="when">' + date + ' at ' + timeValue + '</h4>');
                 }
-
             })
-
+            var i = 0;
             //on click of heart, show a modal move to the next event
             $('.heart').on('click', function() {
-                var count = i;
-                console.log(index);
-                var event = shows.resultsPage.results.event[count];
+                var event = shows.resultsPage.results.event[i];
                 var artist = event.performance[0].artist.displayName;
                 var venue = event.venue.displayName;
                 var date = event.start.date;
                 var time = event.start.time;
                 var songkick = event.performance[0].artist.uri;
-                $('.modal').html('<h2 class="modalText"><div class="artist">' + artist + '</div><div class="venue"> at ' + venue + '</div> was added to your itinerary </h2><a href="#" class="ok">Awesome!</a>')
+                $('.modal').html('<h2 class="modalText"><div class="artist">' + artist + '</div><div class="venue"> at ' + venue + '</div> was added to your itinerary </h2>');
 
-                $('.ok').on('click', function() {
-                    count = i-1;
-                    var event = shows.resultsPage.results.event[count];
-                    var k = i;
-                    if (i <= 99) {
-                        index = i++;
-                    } else
-                        return;
-                    if (date) {
-                        date = date.replace(/(\d{4})-(\d{1,2})-(\d{1,2})/, function(match, y, m, d) {
-                            return m + '/' + d + '/' + y;
-                        });
-                    }
-
-                    $('.show').html('<a class="who link" href="' + songkick + '<h2 class="who link">' + artist + '</h2></a>');
-                    $('.show').append('<h3 class="where"> at ' + venue + '</h3>');
-                    if (time === null) {
-                        $('.show').append('<h4 class="when">' + date + ' at TBA </h4>');
-                    }
-                    if (time) {
-                        var newTime = time.split(':');
-                        var hours = Number(newTime[0]);
-                        var minutes = Number(newTime[1]);
-                        var timeValue = "" + ((hours > 12) ? hours - 12 : hours); // get hours
-                        timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes; // get minutes
-                        timeValue += (hours >= 12) ? " P.M." : " A.M."; // get AM/PM
-                        $('.show').append('<h4 class="when">' + date + ' at ' + timeValue + '</h4>');
-                    }
-                });
             })
 
-
+            $('.ok').on('click', function() {
+                if (i <= 99) {
+                    index = i++;
+                } else
+                    return;
+                console.log('awesome');
+                var event = shows.resultsPage.results.event[i];
+                var artist = event.performance[0].artist.displayName;
+                var venue = event.venue.displayName;
+                var date = event.start.date;
+                var time = event.start.time;
+                var songkick = event.performance[0].artist.uri;
+                for (var i = 0; i < shows.length; i++) {
+                    console.log(i);
+                }
+            })
         })
         .always(function(data) {
 
@@ -181,3 +160,66 @@ $(function() {
             if (err) throw err;
         })
 });
+
+
+
+$('.x').click(function(evt) {
+    dislikeShow(); // removes current show from array
+    displayShow(); // displays next show in array
+});
+
+$('.heart').click(function(evt) {
+    likeShow(); // like the show in the DB, and removes current show from array
+});
+
+$('.ok').click(function(evt) {
+    displayShow(); // displays next show in array
+});
+
+displayShow(); // displays next show in array
+
+
+function dislikeShow() {
+    event.shift();
+}
+
+function likeShow() {
+    $('.modal').html('<h2 class="modalText"><div class="artist">' + show.artist + '</div><div class="venue"> at ' + show.venue + '</div> was added to your itinerary </h2>');
+    event.shift();
+}
+
+function displayShow() {
+    if (date) {
+        date = date.replace(/(\d{4})-(\d{1,2})-(\d{1,2})/, function(match, y, m, d) {
+            return m + '/' + d + '/' + y;
+        });
+    }
+
+    $('.show').html('<a class="who link" href="' + show.songkick + '<h2 class="who link">' + show.artist + '</h2></a>');
+    $('.show').append('<h3 class="where"> at ' + show.venue + '</h3>');
+    if (time === null) {
+        $('.show').append('<h4 class="when">' + show.date + ' at TBA </h4>');
+
+    }
+    if (time) {
+        var newTime = time.split(':');
+        var hours = Number(newTime[0]);
+        var minutes = Number(newTime[1]);
+        var timeValue = "" + ((hours > 12) ? hours - 12 : hours); // get hours
+        timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes; // get minutes
+        timeValue += (hours >= 12) ? " P.M." : " A.M."; // get AM/PM
+        $('.show').append('<h4 class="when">' + date + ' at ' + timeValue + '</h4>');
+    }
+}
+
+function formatShowObj(event) {
+    return {
+        artist: event.performance[0].artist.displayName,
+        venue: event.venue.displayName,
+        date: event.start.date,
+        time: event.start.time,
+        songkick: event.performance[0].artist.uri
+    }
+}
+
+var show = formatShowObj(event);
