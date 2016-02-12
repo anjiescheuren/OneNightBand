@@ -6,23 +6,26 @@
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,900italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Sanchez' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
 
   <body>
     <h1 class="title"><img class="title" src="/images/title.png"></h1>
-     <div class="you">Thousands of bands...one you</div>
-    <div class='howTo'>Create a custom SXSW itinerary one band at a time</div>
-    <section class="show">
+     <!-- <div class="you">Thousands of bands...one you</div> -->
+    <div class='you'>Create a custom SXSW itinerary one band at a time</div>
+    <section class="everything">
+      <section class="show">
+      </section>
+      <input type="image" src="images/x.png" class='x button stop'>
+      <a href="#openModal"><input type="image" src="images/heart.png" class='heart button' id='heart'></a>
+      <a href="#itinerary" class="itinerary" id="itinerary"><h1 class="itinerary">My OneNightBands</h1></a>
     </section>
-    <input type="image" src="images/x.png" class='x button stop'>
-    <a href="#openModal"><input type="image" src="images/heart.png" class='heart button' id='heart'></a>
     <div id="openModal" class="modalWindow">
       <div class="modal">
       </div>
     </div>
-    <a href="itinerary" class="itinerary"><h1 class="itinerary">SXSW Itinerary</h1></a>
-    <ul class="itineraryList">
+    <ul class="itineraryList" id="itinerary">
     </ul>
 
     <script src="/javascripts/shows.js" type="text/javascript" charset="utf-8"></script>

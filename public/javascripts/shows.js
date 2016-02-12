@@ -13,6 +13,7 @@ $(function() {
         .done(function(data) {
             var shows = data.resultsPage.results.event;
             console.log(shows[0].performance[0].artist.displayName);
+
             function formatShowObj(event, i) {
                 return {
                     artist: shows[i].performance[0].artist.displayName,
@@ -78,12 +79,16 @@ $(function() {
                     $('.show').append('<h4 class="when">' + date + ' at ' + timeValue + '</h4>');
                 }
                 if (time === null) {
-                    $('.itineraryList').append('<li class="showArtist">' + show.artist + '</li>' + '<li class="listItem"> at ' + show.venue + '</li>' + '<li class="listItem">' + date + '</li>' + '<li class="listItem"> TBA </li>');
-                    $('.itineraryNew').append('<li class="showArtist">' + show.artist + '</li>' + '<li class="listItem"> at ' + show.venue + '</li>' + '<li class="listItem">' + date + '</li>' + '<li class="listItem"> TBA </li>');
-
+                    $('.itineraryList').append('<li class="showArtist">' + show.artist + '</li>' + '<li class="listItem"> at ' + show.venue + '</li>' + '<li class="listItem">' + date + '</li>' + '<li class="listItem"> TBA </li><a href="" class="delete">Nevermind</a>');
+                    $('.delete').click(function() {
+                        $(eventIndex).html('');
+                    })
                 }
                 if (time) {
-                    $('.itineraryList').append('<li class="showArtist">' + show.artist + '</li>' + '<li class="listItem"> at ' + show.venue + '</li>' + '<li class="listItem">' + date + '</li>' + '<li class="listItem">' + timeValue + '</li>');
+                    $('.itineraryList').append('<li class="showArtist">' + show.artist + '</li>' + '<li class="listItem"> at ' + show.venue + '</li>' + '<li class="listItem">' + date + '</li>' + '<li class="listItem">' + timeValue + '</li><a href="" class="delete">Nevermind</a>');
+                    $('.delete').click(function() {
+                        $(eventIndex).html('');
+                    })
                 }
                 var artist = shows[eventIndex].performance[0].artist.displayName;
                 var venue = shows[eventIndex].venue.displayName;
@@ -102,7 +107,6 @@ $(function() {
                     time += (hours >= 12) ? " P.M." : " A.M."; // get AM/PM
                     liked.push(artist, venue, date, time);
                 }
-                console.log(liked);
 
                 // $.ajax({
                 //     url: apiRoot,
