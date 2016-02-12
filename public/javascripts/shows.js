@@ -11,7 +11,7 @@ $(function() {
         })
         .done(function(data) {
             var shows = data.resultsPage.results.event;
-
+            console.log(shows[0].performance[0].artist.displayName);
             function formatShowObj(event, i) {
                 return {
                     artist: shows[i].performance[0].artist.displayName,
@@ -101,8 +101,36 @@ $(function() {
                     time += (hours >= 12) ? " P.M." : " A.M."; // get AM/PM
                     liked.push(artist, venue, date, time);
                 }
-
                 console.log(liked);
+
+                // $.ajax({
+                //     url: apiRoot,
+                //     method: "POST",
+                //     data: {liked: liked},
+                //     dataType: "json"
+                // })
+
+                // .done(function(err) {
+                //     if (err) thow err;
+                //      var artist = shows[eventIndex].performance[0].artist.displayName;
+                // var venue = shows[eventIndex].venue.displayName;
+                // var showDate = shows[eventIndex].start.date;
+                // var time = shows[eventIndex].start.time;
+                // if (time === null) {
+                //     var nullTime = "TBA";
+                //     liked.push(artist, venue, date, nullTime);
+                // }
+                // if (time) {
+                //     var newTime = time.split(':');
+                //     var hours = Number(newTime[0]);
+                //     var minutes = Number(newTime[1]);
+                //     var time = "" + ((hours > 12) ? hours - 12 : hours); // get hours
+                //     time += (minutes < 10) ? ":0" + minutes : ":" + minutes; // get minutes
+                //     time += (hours >= 12) ? " P.M." : " A.M."; // get AM/PM
+                //     liked.push(artist, venue, date, time);
+                // }
+                // })
+
                 eventIndex++;
             }
 
@@ -139,17 +167,6 @@ $(function() {
         .fail(function(err) {
             if (err) throw err;
         })
-
-        // $.ajax({
-        //     url: apiRoot,
-        //     method: "POST",
-        //     data: {liked: liked},
-        //     dataType: "json"
-        // })
-
-        // .done(function(err) {
-        //     if (err) thow err;
-        // })
 
     $('.itinerary').click(function() {
         window.location.replace("localhost:3000/itinerary");

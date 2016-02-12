@@ -10,9 +10,9 @@ var itinerary = require('./routes/itinerary');
 
 var app = express();
 
-// Mongoose connection
-var mongoose = require('mongoose');
-mongoose.connect(process.env.DB_CONN_ONENIGHTBAND);
+// // Mongoose connection
+// var mongoose = require('mongoose');
+// mongoose.connect(process.env.DB_CONN_ONENIGHTBAND);
 
 
 // view engine setup

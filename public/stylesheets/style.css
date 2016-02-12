@@ -31,13 +31,12 @@ h1 {
 
 .itinerary {
   color: #FF6B6B;
-  font-family: 'Raleway', sans-serif, 100;
   text-align: center;
   margin: 0 auto;
   margin-top: 20px;
   text-decoration: none;
-  font-size: 40px;
-  font-style: italic;
+  font-size: 60px;
+  font-family:'Raleway', sans-serif, 400;
 }
 
 .itineraryList {
