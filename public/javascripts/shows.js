@@ -140,6 +140,17 @@ $(function() {
             if (err) throw err;
         })
 
+        // $.ajax({
+        //     url: apiRoot,
+        //     method: "POST",
+        //     data: {liked: liked},
+        //     dataType: "json"
+        // })
+
+        // .done(function(err) {
+        //     if (err) thow err;
+        // })
+
     $('.itinerary').click(function() {
         window.location.replace("localhost:3000/itinerary");
     })
