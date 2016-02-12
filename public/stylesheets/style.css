@@ -30,8 +30,13 @@ h1 {
   max-width: 80%;
   text-align: center;
   margin: 0 auto;
-  margin-top: 55px;
-  padding: 40px;
+  margin-top: 45px;
+  padding: 30px;
+}
+
+.flame {
+  max-height: 50px;
+
 }
 
 /*.show {
@@ -46,11 +51,12 @@ h1 {
   color: #FF6B6B;
   text-align: center;
   margin: 0 auto;
-  margin-top: 35px;
+  margin-top: 30px;
   text-decoration: none;
-  font-size: 20.8px;
+  font-size: 30px;
   font-family:'Raleway', sans-serif, 400;
   outline-width: 0;
+  font-weight: lighter;
 }
 
 .itineraryList {
@@ -189,12 +195,14 @@ h1 {
   font-family: ;
   font-size: 20.8px;
   font-family: 'Raleway', sans-serif;
+  color: #79777A;
 }
 
 .when {
   font-size: 20.8px;
   font-family: 'Raleway', sans-serif;
   margin: 0 auto;
+  color: #79777A;
 }
 
 /*.link {
