@@ -7,7 +7,8 @@ $(function() {
             url: apiRoot,
             method: "GET",
             data: {},
-            dataType: "json"
+            dataType: "jsonp",
+            jsonCallback: "info"
         })
         .done(function(data) {
             var shows = data.resultsPage.results.event;
