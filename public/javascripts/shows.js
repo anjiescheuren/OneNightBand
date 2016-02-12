@@ -7,7 +7,7 @@ $(function() {
             url: apiRoot,
             method: "GET",
             data: {},
-            dataType: "jsonp",
+            dataType: "json",
             jsonCallback: "info"
         })
         .done(function(data) {
