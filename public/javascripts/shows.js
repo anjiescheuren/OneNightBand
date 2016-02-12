@@ -1,7 +1,8 @@
 $(function() {
     var apiRoot = 'http://api.songkick.com/api/3.0/events.json?location=geo:30.2669444,-97.7427778&per_page=100&min_date=2016-03-15&max_date=2016-03-20&apikey=PTAZie3wbuF6n5dx';
     var eventIndex = 0;
-    var array = ['a', 'b', 'c'];
+    var liked = [];
+
     $.ajax({
             url: apiRoot,
             method: "GET",
@@ -77,10 +78,31 @@ $(function() {
                 }
                 if (time === null) {
                     $('.itineraryList').append('<li class="showArtist">' + show.artist + '</li>' + '<li class="listItem"> at ' + show.venue + '</li>' + '<li class="listItem">' + date + '</li>' + '<li class="listItem"> TBA </li>');
+                    $('.itineraryNew').append('<li class="showArtist">' + show.artist + '</li>' + '<li class="listItem"> at ' + show.venue + '</li>' + '<li class="listItem">' + date + '</li>' + '<li class="listItem"> TBA </li>');
+
                 }
                 if (time) {
                     $('.itineraryList').append('<li class="showArtist">' + show.artist + '</li>' + '<li class="listItem"> at ' + show.venue + '</li>' + '<li class="listItem">' + date + '</li>' + '<li class="listItem">' + timeValue + '</li>');
                 }
+                var artist = shows[eventIndex].performance[0].artist.displayName;
+                var venue = shows[eventIndex].venue.displayName;
+                var showDate = shows[eventIndex].start.date;
+                var time = shows[eventIndex].start.time;
+                if (time === null) {
+                    var nullTime = "TBA";
+                    liked.push(artist, venue, date, nullTime);
+                }
+                if (time) {
+                    var newTime = time.split(':');
+                    var hours = Number(newTime[0]);
+                    var minutes = Number(newTime[1]);
+                    var time = "" + ((hours > 12) ? hours - 12 : hours); // get hours
+                    time += (minutes < 10) ? ":0" + minutes : ":" + minutes; // get minutes
+                    time += (hours >= 12) ? " P.M." : " A.M."; // get AM/PM
+                    liked.push(artist, venue, date, time);
+                }
+
+                console.log(liked);
                 eventIndex++;
             }
 
@@ -118,7 +140,7 @@ $(function() {
             if (err) throw err;
         })
 
-        $('.itinerary').click(function () {
-            window.location.replace("localhost:3000/itinerary");
-        })
+    $('.itinerary').click(function() {
+        window.location.replace("localhost:3000/itinerary");
+    })
 });
