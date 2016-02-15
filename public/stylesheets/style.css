@@ -158,10 +158,18 @@ h1 {
   color: #FF6B6B;
 }
 
-.x {
+.back {
   margin-top: 40px;
   padding-right: 15px;
-  max-height: 55px;
+  max-height: 5em;
+  text-align: center;
+  outline-width: 0;
+}
+
+.x {
+  margin-top: 40px;
+  padding-left: 15px;
+  max-height: 5em;
   text-align: center;
   outline-width: 0;
 }
@@ -169,7 +177,8 @@ h1 {
 .heart {
   margin-top: 40px;
   padding-left: 15px;
-  max-height: 55px;
+  padding-right: 15px;
+  max-height: 5em;
   text-align: center;
   outline-width: 0;
 }

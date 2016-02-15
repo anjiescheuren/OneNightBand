@@ -41,8 +41,10 @@ $(function() {
                 displayShow(show);
             });
 
-            $('.ok').click(function(evt) {
-                //displayShow(show); // displays next show in array
+            $('.back').click(function(evt) {
+                displayPreviousShow(show); // displays previous show in array
+                var show = formatShowObj(event, eventIndex);
+                displayShow(show);
             });
 
             displayShow(show); // displays next show in array
@@ -107,6 +109,7 @@ $(function() {
                     time += (hours >= 12) ? " P.M." : " A.M."; // get AM/PM
                     liked.push(artist, venue, date, time);
                 }
+                eventIndex++;
 
                 // $.ajax({
                 //     url: apiRoot,
@@ -116,16 +119,16 @@ $(function() {
                 // })
 
                 // .done(function(err) {
-                //     if (err) thow err;
+                //    if (err) thow err;
                 //      var artist = shows[eventIndex].performance[0].artist.displayName;
-                // var venue = shows[eventIndex].venue.displayName;
-                // var showDate = shows[eventIndex].start.date;
-                // var time = shows[eventIndex].start.time;
-                // if (time === null) {
+                //      var venue = shows[eventIndex].venue.displayName;
+                //      var showDate = shows[eventIndex].start.date;
+                //      var time = shows[eventIndex].start.time;
+                //      if (time === null) {
                 //     var nullTime = "TBA";
                 //     liked.push(artist, venue, date, nullTime);
                 // }
-                // if (time) {
+                //    if (time) {
                 //     var newTime = time.split(':');
                 //     var hours = Number(newTime[0]);
                 //     var minutes = Number(newTime[1]);
@@ -135,8 +138,6 @@ $(function() {
                 //     liked.push(artist, venue, date, time);
                 // }
                 // })
-
-                eventIndex++;
             }
 
             function displayShow(show) {
@@ -164,6 +165,12 @@ $(function() {
                     timeValue += (hours >= 12) ? " P.M." : " A.M."; // get AM/PM
                     $('.show').append('<h4 class="when">' + date + ' at ' + timeValue + '</h4>');
                 }
+            }
+
+            function displayPreviousShow() {
+                eventIndex--;
+                var show = formatShowObj(event, eventIndex);
+                displayShow(show);
             }
         })
         .always(function(data) {
