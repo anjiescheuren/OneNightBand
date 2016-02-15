@@ -3,7 +3,6 @@
   <head>
     <title><%= title %></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,900italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Sanchez' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
@@ -11,34 +10,24 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
 
-
-      <body>
-      <div class="row">
-        <div class="col-md-12 col-sm-12">
-          <h1 class="title"><img class="title" src="/images/title.png"></h1>
-        </div>
-      </div>
-       <!-- <div class="you">Thousands of bands...one you</div> -->
-      <div class="row">
-        <div class="col-md-12 col-sm-12">
-        <div class='you'>Create a custom SXSW itinerary one band at a time</div>
-      </div>
-      </div>
-      <section class="everything">
-        <section class="show">
-        </section>
-        <input type="image" src="images/x.png" class='x button stop'>
-        <a href="#openModal"><input type="image" src="images/heart.png" class='heart button' id='heart'></a>
-        <a href="#itinerary" class="itinerary" id="itinerary"><h1 class="itinerary"><img class="flame" src="/images/flame.png">My OneNightBands</h1></a>
+  <body>
+    <h1 class="title"><img class="title" src="/images/title.png"></h1>
+     <!-- <div class="you">Thousands of bands...one you</div> -->
+    <div class='you'>Create a custom SXSW itinerary one band at a time</div>
+    <section class="everything">
+      <section class="show">
       </section>
-      <div id="openModal" class="modalWindow">
-        <div class="modal">
-        </div>
+      <input type="image" src="images/x.png" class='x button stop'>
+      <a href="#openModal"><input type="image" src="images/heart.png" class='heart button' id='heart'></a>
+      <a href="#itinerary" class="itinerary" id="itinerary"><h1 class="itinerary"><img class="flame" src="/images/flame.png">My OneNightBands</h1></a>
+    </section>
+    <div id="openModal" class="modalWindow">
+      <div class="modal">
       </div>
-      <ul class="itineraryList" id="itinerary">
-      </ul>
+    </div>
+    <ul class="itineraryList" id="itinerary">
+    </ul>
 
-      <script src="/javascripts/shows.js" type="text/javascript" charset="utf-8"></script>
-    </body>
-
+    <script src="/javascripts/shows.js" type="text/javascript" charset="utf-8"></script>
+  </body>
 </html>
