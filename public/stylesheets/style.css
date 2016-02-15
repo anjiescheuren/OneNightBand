@@ -137,7 +137,7 @@ h1 {
   margin: 0 auto;
   margin-bottom: 10px;
   font-size: 65px;*/
-  max-height: 120px;
+  width: 100%;
   padding: 0;
 }
 
