@@ -1,214 +1,116 @@
-html {
-  background-color: #E8E8E8;
+input {
+  max-width: 100%;
+  max-height: auto;
 }
-
 body {
-  padding: 40px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   text-align: center;
-  margin: 0 15em;
   background-color: white;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: bold;
 }
-
 a {
   color: #00B7FF;
 }
-
 ul {
-  list-style: none
+  list-style: none;
+  font-size: 1em;
+  padding: 0;
 }
-
-h1 {
-  text-align: center;
-  margin: 0 auto;
-  font-size: 50px;
+#selectwrap{
+  margin: 10px;
+  margin-top: 1em;
+  border-radius: 12.5px;
+  background-color: #e0f6ff;
+  padding: 1em;
+  padding-bottom: 2em;
 }
-
-.everything {
-  border: 1px solid #D3D3D3;
-  box-shadow: 1px 1px 2px #D3D3D3;
-  max-width: 80%;
-  text-align: center;
-  margin: 0 auto;
-  margin-top: 45px;
-  padding: 30px;
+#listmessage{
+  color: #00B7FF;
+  font-weight: bold;
+  font-size: 2em;
+  border-radius: 12.5px;
+  background-color: #f4f4f4;
 }
+#listwrap{
+  /*margin: 10px;
+  margin-top: 1em;
+  border-radius: 12.5px;
+  background-color: #f4f4f4;
+  padding: 1em;*/
 
-.flame {
-  max-height: 50px;
-
+  margin: 10px;
+  margin-top: 1em;
+  border-radius: 12.5px;
+  background-color: #f4f4f4;
+  padding: 1em;
+  padding-bottom: 2em;
 }
-
-/*.show {
-  text-align: center;
-  margin: 0 auto;
-  margin-top: 55px;
-  padding: 20px;
-  /*background-color: #7DDE7D;*/
-/*}*/
-
-.itinerary {
-  color: #FF6B6B;
-  text-align: center;
-  margin: 0 auto;
-  margin-top: 30px;
-  text-decoration: none;
-  font-size: 30px;
-  font-family:'Raleway', sans-serif, 400;
-  outline-width: 0;
-  font-weight: lighter;
+#title {
+  margin-top: 2em;
+  max-width: 100%;
+  max-height: auto;
 }
-
-.itineraryList {
-  font-family: 'Raleway', sans-serif, 600;
-  text-align: center;
-  margin: 0 auto;
-  margin-top: 25px;
-  font-size: 22px;
-  padding: 10px;
+#tagline {
+  color: #00B7FF;
+  font-weight: bold;
+  font-size: 1.3em;
+  margin-bottom: 1.5em;
 }
-
-.listItem {
-  padding-top: 5px;
-  font-size: 20.8px;
-  font-family: 'Raleway', sans-serif;
-}
-
 .showArtist {
-  margin-top: 15px;
-  font-size: 30.8px;
-}
-
-.modalWindow {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: rgba(0,0,0,0.2);
-    z-index: 99999;
-    opacity:0;
-    pointer-events: none;
-    text-align:center;
-
-}
-.modalWindow:target {
-    opacity:1;
-    pointer-events: auto;
-}
-.modalWindow > div {
-    width: 500px;
-    position: relative;
-    margin: 10% auto;
-    background: #fff;
-    padding: 10px;
-    border-radius: 50px;
-}
-
-.modalText {
-  font-family: 'Raleway', sans-serif, 100;
+  color: #FF6B6B;
   font-style: italic;
-  color: #4DCFB5;
-  font-size: 22.8px;
-  margin: 0 auto;
-  padding-bottom: 15px;
+  font-weight: bold;
+  margin-top: 15px;
+  font-size: 1.8em;
 }
-
 .ok {
   font-size: 20px;
   text-decoration: none;
-  font-family: 'Montserrat', sans-serif;
   color: #FF6B6B;
 }
-
+.no{
+  max-width: 90%;
+}
 .delete {
-  color: #4DCFB5;
-  font-family: 'Montserrat', sans-serif;
-  padding: 6px;
-  border-radius: 50px;
+  font-weight: bold;
+  color: #00B7FF;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 1.5em;
 }
-
-.title {
-  /*font-family: 'Raleway', sans-serif;
-  font-style: italic;
-  color: #FF6B6B;
-  margin: 0 auto;
-  margin-bottom: 10px;
-  font-size: 65px;*/
-  width: 100%;
-  padding: 0;
-}
-
 .howTo {
   font-size: 20px;
   padding-top: 20px;
-  font-family:'Raleway', sans-serif, 400;
   font-weight: lighter;
   font-style: italic;
 }
-
 .you {
   font-size: 25px;
-  padding-top: 0;
-  font-family:'Raleway', sans-serif, 400;
   font-weight: 100;
   font-style: italic;
   color: #FF6B6B;
 }
-
-.x {
-  margin-top: 40px;
-  padding-right: 15px;
-  max-height: 55px;
-  text-align: center;
-  outline-width: 0;
-}
-
-.heart {
-  margin-top: 40px;
-  padding-left: 15px;
-  max-height: 55px;
-  text-align: center;
-  outline-width: 0;
-}
-
-#show {
-  outline-width: 0;
-  border: none;
-  background: none;
-  max-height: 35px;
-}
-
-.who {
-  font-family: ;
-  font-size: 35px;
-  font-family: 'Raleway', sans-serif, 600;
+.itinerary {
   color: #FF6B6B;
-  margin: 0 auto;
   text-decoration: none;
+  padding: 1em;
+}
+.listItem {
+  font-weight: bold;
+  color: #333;
+  font-size: 1.25em;
+  margin-bottom: .25em;
+}
+.who {
+  font-style: italic;
+  font-size: 3em;
+  color: #FF6B6B;
+}
+.where {
+  font-size: 1.75em;
   font-weight: bold;
 }
-
-.where {
-  font-family: ;
-  font-size: 20.8px;
-  font-family: 'Raleway', sans-serif;
-  color: #79777A;
-}
-
 .when {
-  font-size: 20.8px;
-  font-family: 'Raleway', sans-serif;
-  margin: 0 auto;
-  color: #79777A;
+  font-size: 1.25em;
+  margin-bottom: 1.5em;
+  font-weight: bold;
 }
-
-/*.link {
-  text-decoration: none;
-  padding: 15px;
-  color: #6ABDBD;
-  font-family: 'Raleway', sans-serif, 600;
-  font-size: 18px;
-}*/
