@@ -35,15 +35,14 @@ $(function() {
       });
 
       $('.yes').click(function(evt) {
-        $('#confirm').html('Success! Show added to itinerary.').fadeOut(2250, function() {
-        });
+
         //shows.shift();
         likeShow(); // shows the modal, adds the show to the DB, and removes current show from array
         var show = formatShowObj(event, eventIndex);
         displayShow(show);
 
+
       });
-      $('#confirm' ).remove();
 
       $('.ok').click(function(evt) {
         //displayShow(show); // displays next show in array
@@ -60,6 +59,13 @@ $(function() {
       function likeShow() {
         var show = formatShowObj(event, eventIndex);
         $('.modal').html('<h2 class="modalText"><div class="artist">' + show.artist + '</div><div class="venue"> at ' + show.venue + '</div> was added to your itinerary </h2><a href="#" class="ok">Awesome!</a>');
+        //this is broken. shows the first iteration but then wont reappear.
+        //possibly due to the div still being present -- but faded out
+
+        // $('#confirm').html('Success! Show added to itinerary.').fadeOut(2250, function() {
+        //   // Animation complete
+        // });
+        
         var date = show.date;
         if (date) {
           date = date.replace(/(\d{4})-(\d{1,2})-(\d{1,2})/, function(match, y, m, d) {
