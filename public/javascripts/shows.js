@@ -19,8 +19,8 @@ $(function() {
         return {
           artist: shows[i].performance[0].artist.displayName,
           venue: shows[i].venue.displayName,
-          date: shows[i].start.date,
-          time: shows[i].start.time,
+          date: moment(shows[i].start.date, "YYYY-MM-DD").format("dddd, MMMM Do"),
+          time: moment(shows[i].start.time, "HH:mm:ss").format("h:mm a"),
           songkick: shows[i].performance[0].artist.uri
         }
       }
@@ -59,65 +59,42 @@ $(function() {
 
       function likeShow() {
         var show = formatShowObj(event, eventIndex);
-        $('.modal').html('<h2 class="modalText"><div class="artist">' + show.artist + '</div><div class="venue"> at ' + show.venue + '</div> was added to your itinerary </h2><a href="#" class="ok">Awesome!</a>');
-        //this is broken. shows the first iteration but then wont reappear.
-        //possibly due to the div still being present -- but faded out
-
-        // $('#confirm').html('Success! Show added to itinerary.').fadeOut(2250, function() {
-        //   // Animation complete
-        // });
-
-        var date = show.date;
-        if (date) {
-          date = date.replace(/(\d{4})-(\d{1,2})-(\d{1,2})/, function(match, y, m, d) {
-            return m + '/' + d + '/' + y;
-          });
-        }
 
         $('.show').html('<a class="who link" href="' + show.songkick + '<h2 class="who link">' + show.artist + '</h2></a>');
         $('.show').append('<h3 class="where"> at ' + show.venue + '</h3>');
         var time = show.time;
-        if (time === null) {
-          $('.show').append('<h4 class="when">' + date + ' at TBA </h4>');
-        }
-        if (time) {
-          var newTime = time.split(':');
-          var hours = Number(newTime[0]);
-          var minutes = Number(newTime[1]);
-          var timeValue = "" + ((hours > 12) ? hours - 12 : hours); // get hours
-          timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes; // get minutes
-          timeValue += (hours >= 12) ? " P.M." : " A.M."; // get AM/PM
-          $('.show').append('<h4 class="when">' + date + ' at ' + timeValue + '</h4>');
-        }
-        if (time === null) {
-          $('.itineraryList').append('<li class="showArtist">' + show.artist + '</li>' + '<li class="listItem"> at ' + show.venue + '</li>' + '<li class="listItem">' + date + '</li>' + '<li class="listItem"> TBA </li><a href="" class="delete">Remove</a>');
-          $('.delete').click(function() {
-            $(eventIndex).html('');
+
+        if (time === "Invalid date") {
+          $('.itineraryList').append('<li class="event"><div class="showArtist">' + show.artist + '</div>' + '<div class="listItem"> at ' + show.venue + '</div><div class="listItem">' + show.date + '</div><div class="listItem"> TBA </div><a href="" class="delete">Remove</a></li>');
+          $('.delete').click(function(e) {
+            e.preventDefault();
+            $('.event').html('');
           })
         }
-        if (time) {
-          $('.itineraryList').append('<li class="showArtist">' + show.artist + '</li>' + '<li class="listItem"> at ' + show.venue + '</li>' + '<li class="listItem">' + date + '</li>' + '<li class="listItem">' + timeValue + '</li><a href="" class="delete">Remove</a>');
-          $('.delete').click(function() {
-            $(eventIndex).html('');
+        if (time != "Invalid date") {
+          $('.itineraryList').append('<li class="event"><div class="showArtist">' + show.artist + '</div>' + '<div class="listItem"> at ' + show.venue + '</div><div class="listItem">' + show.date + '</div><div class="listItem">' + time + '</div><a href="" class="delete">Remove</a></li>');
+          $('.delete').click(function(e) {
+            e.preventDefault();
+            $('.event').html('');
           })
         }
-        var artist = shows[eventIndex].performance[0].artist.displayName;
-        var venue = shows[eventIndex].venue.displayName;
-        var showDate = shows[eventIndex].start.date;
-        var time = shows[eventIndex].start.time;
-        if (time === null) {
-          var nullTime = "TBA";
-          liked.push(artist, venue, date, nullTime);
-        }
-        if (time) {
-          var newTime = time.split(':');
-          var hours = Number(newTime[0]);
-          var minutes = Number(newTime[1]);
-          var time = "" + ((hours > 12) ? hours - 12 : hours); // get hours
-          time += (minutes < 10) ? ":0" + minutes : ":" + minutes; // get minutes
-          time += (hours >= 12) ? " P.M." : " A.M."; // get AM/PM
-          liked.push(artist, venue, date, time);
-        }
+        // var artist = shows[eventIndex].performance[0].artist.displayName;
+        // var venue = shows[eventIndex].venue.displayName;
+        // var showDate = shows[eventIndex].start.date;
+        // var time = shows[eventIndex].start.time;
+        // if (time === "Invalid date") {
+        //   var nullTime = "TBA";
+        //   liked.push(artist, venue, date, nullTime);
+        // }
+        // if (time != "Invalid date") {
+        //   var newTime = time.split(':');
+        //   var hours = Number(newTime[0]);
+        //   var minutes = Number(newTime[1]);
+        //   var time = "" + ((hours > 12) ? hours - 12 : hours); // get hours
+        //   time += (minutes < 10) ? ":0" + minutes : ":" + minutes; // get minutes
+        //   time += (hours >= 12) ? " P.M." : " A.M."; // get AM/PM
+        //   liked.push(artist, venue, date, time);
+        // }
 
         eventIndex++;
       }
@@ -126,26 +103,15 @@ $(function() {
         // console.log(show);
 
         var date = show.date;
-        if (date) {
-          date = date.replace(/(\d{4})-(\d{1,2})-(\d{1,2})/, function(match, y, m, d) {
-            return m + '/' + d + '/' + y;
-          });
-        }
 
         $('.show').html('<a class="who link" href="' + show.songkick + '<h2 class="who link">' + show.artist + '</h2></a>');
         $('.show').append('<h3 class="where"> at ' + show.venue + '</h3>');
         var time = show.time;
-        if (time === null) {
-          $('.show').append('<h4 class="when">' + date + ' at TBA </h4>');
+        if (time === "Invalid date") {
+          $('.show').append('<h4 class="when">' + show.date + ' at TBA </h4>');
         }
-        if (time) {
-          var newTime = time.split(':');
-          var hours = Number(newTime[0]);
-          var minutes = Number(newTime[1]);
-          var timeValue = "" + ((hours > 12) ? hours - 12 : hours); // get hours
-          timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes; // get minutes
-          timeValue += (hours >= 12) ? " P.M." : " A.M."; // get AM/PM
-          $('.show').append('<h4 class="when">' + date + ' at ' + timeValue + '</h4>');
+        if (time != "Invalid date") {
+          $('.show').append('<h4 class="when">' + show.date + ' at ' + time + '</h4>');
         }
       }
     })
