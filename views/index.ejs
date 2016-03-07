@@ -2,34 +2,67 @@
 <html>
   <head>
     <title><%= title %></title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <link href='https://fonts.googleapis.com/css?family=Raleway:400,900italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Sanchez' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   </head>
 
   <body>
-    <h1 class="title"><img class="title" src="/images/title.png"></h1>
-     <!-- <div class="you">Thousands of bands...one you</div> -->
-    <div class='you'>Create a custom SXSW itinerary one band at a time</div>
-    <section class="everything">
-      <section class="show">
-      </section>
-      <input type="image" src="images/orangearrow.png" class='back button'>
-      <a href="#openModal"><input type="image" src="images/heart.png" class='heart button' id='heart'></a>
-      <input type="image" src="images/x.png" class='x button stop'>
-      <a href="#itinerary" class="itinerary" id="itinerary"><h1 class="itinerary"><img class="flame" src="/images/flame.png">My OneNightBands</h1></a>
-    </section>
-    <div id="openModal" class="modalWindow">
-      <div class="modal">
+    <div class="container-fluid">
+      <div id="headerwrap">
+        <div class="row">
+          <div class="col-xs-12">
+            <img id="title" src="/images/title.png">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div id='tagline'>
+              <i class="fa fa-headphones"></i>
+              Your SXSW itinerary done quick
+              <i class="fa fa-headphones"></i>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <ul class="itineraryList" id="itinerary">
-    </ul>
-
-    <script src="/javascripts/shows.js" type="text/javascript" charset="utf-8"></script>
-  </body>
-</html>
+      <div class="row">
+        <div class="col-xs-12">
+          <div id="confirm"></div>
+        </div>
+      </div>
+      <div id="selectwrap">
+        <div class="row">
+          <div class="col-xs-12">
+            <section class="show"></section>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-2"></div>
+          <div class="col-xs-8">
+            <div class="col-xs-6">
+              <input type="image" src="images/x.png" class='no stop'>
+            </div>
+            <div class="col-xs-6">
+              <input type="image" src="images/heart.png" class='yes'>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-2"></div>
+      <div id="listwrap">
+        <!-- <a href="#itinerary" class="itinerary" id="itinerary"> -->
+          <div class="row">
+            <div class="col-xs-12">
+              <p id="listmessage">Your itinerary:</p>
+              <ul class="itineraryList" id="itinerary"></ul>
+            </div>
+          </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="/javascripts/shows.js" type="text/javascript" charset="utf-8"></script>
+      </body>
+    </html>
