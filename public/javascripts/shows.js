@@ -49,22 +49,23 @@ $(function() {
       function likeShow() {
         var show = formatShowObj(event, eventIndex);
         displayShow(show);
+        eventIndex++;
+        console.log(eventIndex);
 
         if (show.time === "Invalid date") {
-          $('.itineraryList').append('<li class="event"><div class="showArtist">' + show.artist + '</div><div class="listItem"> at ' + show.venue + '</div><div class="listItem">' + show.date + '</div><div class="listItem"> TBA </div><a href="" class="delete">Remove</a></li>');
+          $('.itineraryList').append('<li class="event" id="' + eventIndex + '"><div class="showArtist">' + show.artist + '</div><div class="listItem"> at ' + show.venue + '</div><div class="listItem">' + show.date + '</div><div class="listItem"> TBA </div><a href="" class="delete">Remove</a></li>');
           $('.delete').click(function(e) {
             e.preventDefault();
-            $('.event').html('');
+            $('.event#' + eventIndex).html('');
           })
         }
         if (show.time != "Invalid date") {
-          $('.itineraryList').append('<li class="event"><div class="showArtist">' + show.artist + '</div><div class="listItem"> at ' + show.venue + '</div><div class="listItem">' + show.date + '</div><div class="listItem">' + show.time + '</div><a href="" class="delete">Remove</a></li>');
+          $('.itineraryList').append('<li class="event" id="' + eventIndex + '"><div class="showArtist">' + show.artist + '</div><div class="listItem"> at ' + show.venue + '</div><div class="listItem">' + show.date + '</div><div class="listItem">' + show.time + '</div><a href="" class="delete">Remove</a></li>');
           $('.delete').click(function(e) {
             e.preventDefault();
-            $('.event').html('');
+            $('.event#' + eventIndex).html('');
           })
         }
-        eventIndex++;
       }
 
       function displayShow(show) {
