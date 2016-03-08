@@ -3,6 +3,10 @@ input {
   max-height: auto;
 }
 body {
+  margin-top: 2em;
+  height: 736px;
+  max-width: 414px;
+  min-width: 320px;
   text-align: center;
   background-color: white;
   font-family: 'Work Sans', sans-serif;
@@ -16,19 +20,18 @@ ul {
   font-size: 1em;
   padding: 0;
 }
-input{
+input {
   outline: none;
 }
-#selectwrap{
+#selectwrap {
   margin: 10px;
   margin-top: 1em;
   border-radius: 12.5px;
-  padding: 1em;
-  padding-bottom: 2em;
+  padding: 2.5em;
+  padding-bottom: 3em;
   background-color: #f4f4f4;
 }
 #title {
-  margin-top: 2em;
   max-width: 100%;
   max-height: auto;
 }
@@ -38,13 +41,13 @@ input{
   font-size: 1.3em;
   margin-bottom: 1.5em;
 }
-#listmessage{
+#listmessage {
   color: #00B7FF;
   font-weight: bold;
   font-size: 2em;
   border-radius: 12.5px;
 }
-#listwrap{
+#listwrap {
   margin: 10px;
   margin-top: 1em;
   border-radius: 12.5px;
@@ -53,7 +56,6 @@ input{
   padding-bottom: 2em;
   margin-bottom: 2em;
 }
-
 .showArtist {
   color: #FF6B6B;
   font-style: italic;
@@ -66,7 +68,7 @@ input{
   text-decoration: none;
   color: #FF6B6B;
 }
-.no{
+.no {
   max-width: 90%;
 }
 .delete {
@@ -113,4 +115,29 @@ input{
   font-size: 1.25em;
   margin-bottom: 1.5em;
   font-weight: bold;
+}
+
+@media only screen and (min-width: 415px) {
+  * {
+    max-width: 413px;
+    margin: 0 auto;
+  }
+  html {
+    background-color: #00b7ff;
+  }
+  #title{
+    margin-top: 1.5em;
+  }
+  body{
+    margin-top: 0em;
+  }
+  html{
+    border-left: 15px solid black;
+    border-right: 15px solid black;
+    border-top: 110px solid black;
+    border-bottom: 110px solid black;
+    border-radius: 50px;
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
 }
