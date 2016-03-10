@@ -7,7 +7,7 @@ $(function() {
   var pages = ["page=1", "page=2", "page=3", "page=4", "page=5", "page=6", "page=7", "page=8"];
   for(var p = 0; p < pages.length; p++) {
     var apiRoot = 'https://api.songkick.com/api/3.0/events.json?location=geo:30.2669444,-97.7427778&' + pages[p] + '&per_page=100&min_date=2016-03-15&max_date=2016-03-20&apikey=PTAZie3wbuF6n5dx&jsoncallback=?';
-    console.log(apiRoot);
+    // console.log(apiRoot);
   }
 
   $.ajax({
