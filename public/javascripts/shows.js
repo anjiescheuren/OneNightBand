@@ -4,6 +4,15 @@ $(function() {
   var eventIndex = 0;
   var liked = [];
 
+  var ref = new Firebase("https://blinding-torch-1750.firebaseio.com");
+  ref.authWithOAuthPopup("twitter", function(error, authData) {
+    if (error) {
+      console.log("Login Failed!", error);
+    } else {
+      console.log("Authenticated successfully with payload:", authData);
+    }
+  });
+
   $.ajax({
       url: apiRoot,
       method: "GET",
