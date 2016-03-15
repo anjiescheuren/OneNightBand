@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'OneNightBand'});
 });
 
-router.post('/send', function(req, res, next) {
+router.post('/', function(req, res, next) {
     // Twilio Credentials
     var accountSid = 'ACdf7d35b9d29aa6c91b56084fafb2e38b';
     var authToken = 'c5417a84cf54025a7e54810467e72cfc';
