@@ -1,4 +1,5 @@
 $(function() {
+  var myDataRef = new Firebase('https://u7wiyuvlbvi.firebaseio-demo.com/');
   var apiRoot = 'https://api.songkick.com/api/3.0/events.json?location=geo:30.2669444,-97.7427778&per_page=100&min_date=2016-03-15&max_date=2016-03-20&apikey=PTAZie3wbuF6n5dx&jsoncallback=?';
   var eventIndex = 0;
   var liked = [];
@@ -49,6 +50,7 @@ $(function() {
       function likeShow() {
         var show = formatShowObj(event, eventIndex);
         displayShow(show);
+        myDataRef.push({artist: show.artist, venue: show.venue, date: show.date, time: show.time});
         eventIndex++;
         console.log(eventIndex);
 
