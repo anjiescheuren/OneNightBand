@@ -52,15 +52,30 @@ $(function() {
         eventIndex++;
         console.log(eventIndex);
 
-        if (show.time === "Invalid date") {
+        if (show.time === "Invalid date" && show.venue != "Unknown venue") {
           $('.itineraryList').append('<li class="event" id="' + eventIndex + '"><div class="showArtist">' + show.artist + '</div><div class="listItem"> at ' + show.venue + '</div><div class="listItem">' + show.date + '</div><div class="listItem"> TBA </div><a href="" class="delete">Remove</a></li>');
           $('.delete').click(function(e) {
             e.preventDefault();
             $('.event#' + eventIndex).html('');
           })
         }
-        if (show.time != "Invalid date") {
+        if (show.time === "Invalid date" && show.venue === "Unknown venue") {
+          $('.itineraryList').append('<li class="event" id="' + eventIndex + '"><div class="showArtist">' + show.artist + '</div><div class="listItem"> at TBA</div><div class="listItem">' + show.date + '</div><div class="listItem"> TBA </div><a href="" class="delete">Remove</a></li>');
+          $('.delete').click(function(e) {
+            e.preventDefault();
+            $('.event#' + eventIndex).html('');
+          })
+        }
+
+        if (show.time != "Invalid date" && show.venue != "Unknown venue") {
           $('.itineraryList').append('<li class="event" id="' + eventIndex + '"><div class="showArtist">' + show.artist + '</div><div class="listItem"> at ' + show.venue + '</div><div class="listItem">' + show.date + '</div><div class="listItem">' + show.time + '</div><a href="" class="delete">Remove</a></li>');
+          $('.delete').click(function(e) {
+            e.preventDefault();
+            $('.event#' + eventIndex).html('');
+          })
+        }
+        if (show.time != "Invalid date" && show.venue === "Unknown venue") {
+          $('.itineraryList').append('<li class="event" id="' + eventIndex + '"><div class="showArtist">' + show.artist + '</div><div class="listItem"> at TBA </div><div class="listItem">' + show.date + '</div><div class="listItem">' + show.time + '</div><a href="" class="delete">Remove</a></li>');
           $('.delete').click(function(e) {
             e.preventDefault();
             $('.event#' + eventIndex).html('');
@@ -70,7 +85,12 @@ $(function() {
 
       function displayShow(show) {
         $('.show').html('<a class="who link" href="' + show.songkick + '<h2 class="who link">' + show.artist + '</h2></a>');
-        $('.show').append('<h3 class="where"> at ' + show.venue + '</h3>');
+        if (show.venue === "Unknown venue") {
+          $('.show').append('<h3 class="where"> at TBA </h3>');
+        }
+        else {
+          $('.show').append('<h3 class="where"> at ' + show.venue + '</h3>');
+        }
         if (show.time === "Invalid date") {
           $('.show').append('<h4 class="when">' + show.date + ' at TBA </h4>');
         }
