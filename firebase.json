@@ -1,9 +1,9 @@
-{
-  "firebase": "blinding-torch-1750",
-  "public": "views",
-  "ignore": [
-    "firebase.json",
-    "**/.*",
-    "**/node_modules/**"
-  ]
-}
+// {
+//   "firebase": "blinding-torch-1750",
+//   "public": "views",
+//   "ignore": [
+//     "firebase.json",
+//     "**/.*",
+//     "**/node_modules/**"
+//   ]
+// }
