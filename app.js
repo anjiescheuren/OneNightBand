@@ -5,13 +5,13 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var moment = require('moment');
 moment().format();
-// var favicon = require('serve-favicon');
+
 
 var routes = require('./routes/index');
 var itinerary = require('./routes/itinerary');
 
 var app = express();
-// app.use(favicon(__dirname + '/public/favicon.ico'));
+
 
 // // Mongoose connection
 // var mongoose = require('mongoose');
