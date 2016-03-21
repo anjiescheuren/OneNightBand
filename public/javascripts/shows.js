@@ -1,13 +1,13 @@
 $(function() {
   var myDataRef = new Firebase('https://u7wiyuvlbvi.firebaseio-demo.com/');
   var currentDate = moment().format("YYYY-MM-DD");
-  var dates = ["2016-03-15", "2016-03-16", "2016-03-17", "2016-03-18", "2016-03-19", "2016-03-20", "2016-03-21", "2016-03-22", "2016-03-23"];
+  var dates = ["2016-03-20", "2016-03-21", "2016-03-22"];
 
   for (var i = 0; i < dates.length; i++) {
     var date = dates[i];
     if (date < currentDate) {
     date = dates[i+1];
-    var apiRoot = 'https://api.songkick.com/api/3.0/events.json?location=geo:30.2669444,-97.7427778&per_page=100&min_date=' + date + '&max_date=2016-03-25&apikey=PTAZie3wbuF6n5dx&jsoncallback=?';
+    var apiRoot = 'https://api.songkick.com/api/3.0/events.json';
     }
   }
 
@@ -26,9 +26,14 @@ $(function() {
   $.ajax({
       url: apiRoot,
       method: "GET",
-      data: {},
-      dataType: "jsonp",
-      jsonCallback: "info"
+      data: {
+        location: 'geo:30.2669444,-97.7427778',
+        per_page: 100,
+        min_date: currentDate,
+        max_date: '2016-03-31',
+        apikey: 'PTAZie3wbuF6n5dx'
+      },
+      dataType: "json"
     })
 
     .done(function(data) {
@@ -71,7 +76,6 @@ $(function() {
         displayShow(show);
         myDataRef.push({artist: show.artist, venue: show.venue, date: show.date, time: show.time});
         eventIndex++;
-        console.log(eventIndex);
 
         if (show.time === "Invalid date" && show.venue != "Unknown venue") {
           $('.itineraryList').append('<li class="event" id="' + eventIndex + '"><div class="showArtist">' + show.artist + '</div><div class="listItem"> at ' + show.venue + '</div><div class="listItem">' + show.date + '</div><div class="listItem"> TBA </div><a href="" class="delete">Remove</a></li>');
