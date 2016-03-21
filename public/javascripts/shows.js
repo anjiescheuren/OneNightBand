@@ -1,12 +1,31 @@
 $(function() {
+  var myDataRef = new Firebase('https://u7wiyuvlbvi.firebaseio-demo.com/');
   var currentDate = moment().format("YYYY-MM-DD");
-  var apiRoot1 = 'https://api.songkick.com/api/3.0/events.json?location=geo:30.2669444,-97.7427778&per_page=100&min_date=2016-03-15&max_date=2016-03-20&apikey=PTAZie3wbuF6n5dx&jsoncallback=?';
+  var dates = ["2016-03-15", "2016-03-16", "2016-03-17", "2016-03-18", "2016-03-19", "2016-03-20"];
+
+  for (var i = 0; i < dates.length; i++) {
+    var date = dates[i];
+    if (date < currentDate) {
+    date = dates[i+1];
+    var apiRoot = 'https://api.songkick.com/api/3.0/events.json?location=geo:30.2669444,-97.7427778&per_page=100&min_date=' + date + '&max_date=2016-03-20&apikey=PTAZie3wbuF6n5dx&jsoncallback=?';
+    }
+  }
+
   var eventIndex = 0;
   var liked = [];
   var disliked = [];
 
-    $.ajax({
-      url: apiRoot1,
+  var ref = new Firebase("https://blinding-torch-1750.firebaseio.com");
+  ref.authWithOAuthPopup("twitter", function(error, authData) {
+    if (error) {
+      console.log("Login Failed!", error);
+    } else {
+      console.log("Authenticated successfully with payload:", authData);
+    }
+  });
+
+  $.ajax({
+      url: apiRoot,
       method: "GET",
       data: {},
       dataType: "jsonp",
@@ -62,30 +81,55 @@ $(function() {
       }
 
       function likeShow() {
-        var venue = formatShowObj(shows, event, eventIndex);
-        displayShow(venue);
+
+        var show = formatShowObj(event, eventIndex);
+        displayShow(show);
+        myDataRef.push({artist: show.artist, venue: show.venue, date: show.date, time: show.time});
         eventIndex++;
 
-        if (venue.time === "Invalid date" && venue.name === "Unknown venue") {
-          $('.itineraryList').append('<li class="event" data-eventId="' + venue.id + '" id="event-' + venue.id + '"><div class="showArtist">' + venue.artist + '</div><div class="listItem"> at TBA</div><div class="listItem">' + venue.date + '</div><div class="listItem"> TBA </div><a href="" class="delete">Remove</a></li>');
+        if (show.time === "Invalid date" && show.venue != "Unknown venue") {
+          $('.itineraryList').append('<li class="event" id="' + eventIndex + '"><div class="showArtist">' + show.artist + '</div><div class="listItem"> at ' + show.venue + '</div><div class="listItem">' + show.date + '</div><div class="listItem"> TBA </div><a href="" class="delete">Remove</a></li>');
           $('.delete').click(function(e) {
             e.preventDefault();
             $('.event#event-' + venue.id).html('');
           })
         }
-        if (venue.time === "Invalid date" && venue.name != "Unknown venue") {
-          $('.itineraryList').append('<li class="event" data-eventId="' + venue.id + '" id="event-' + venue.id + '"><div class="showArtist">' + venue.artist + '</div><div class="listItem"> at ' + venue.name + '</div><div class="listItem">' + venue.date + '</div><div class="listItem"> TBA </div><a href="" class="delete">Remove</a></li>');
+
+        if (show.time === "Invalid date" && show.venue === "Unknown venue") {
+          $('.itineraryList').append('<li class="event" id="' + eventIndex + '"><div class="showArtist">' + show.artist + '</div><div class="listItem"> at TBA</div><div class="listItem">' + show.date + '</div><div class="listItem"> TBA </div><a href="" class="delete">Remove</a></li>');
+          $('.delete').click(function(e) {
+            e.preventDefault();
+            $('.event#' + eventIndex).html('');
+          })
+        }
+
+        if (show.time != "Invalid date" && show.venue != "Unknown venue") {
+          $('.itineraryList').append('<li class="event" id="' + eventIndex + '"><div class="showArtist">' + show.artist + '</div><div class="listItem"> at ' + show.venue + '</div><div class="listItem">' + show.date + '</div><div class="listItem">' + show.time + '</div><a href="" class="delete">Remove</a></li>');
           $('.delete').click(function(e) {
             e.preventDefault();
             $('.event#event-' + venue.id).html('');
           })
         }
-        if (venue.time != "Invalid date" && venue.name != "Unknown venue") {
-          $('.itineraryList').append('<li class="event" data-eventId="' + venue.id + '" id="event-' + venue.id + '"><div class="showArtist">' + venue.artist + '</div><div class="listItem"> at ' + venue.name + '</div><div class="listItem">' + venue.date + '</div><div class="listItem">' + venue.time + '</div><a href="" class="delete">Remove</a></li>');
+
+        if (show.time != "Invalid date" && show.venue === "Unknown venue") {
+          $('.itineraryList').append('<li class="event" id="' + eventIndex + '"><div class="showArtist">' + show.artist + '</div><div class="listItem"> at TBA </div><div class="listItem">' + show.date + '</div><div class="listItem">' + show.time + '</div><a href="" class="delete">Remove</a></li>');
           $('.delete').click(function(e) {
             e.preventDefault();
-            $('.event#event-' + venue.id).html('');
+            $('.event#' + eventIndex).html('');
           })
+        }
+      }
+
+      function displayShow(show) {
+        $('.show').html('<a class="who link" href="' + show.songkick + '<h2 class="who link">' + show.artist + '</h2></a>');
+        if (show.venue === "Unknown venue") {
+          $('.show').append('<h3 class="where"> at TBA </h3>');
+        }
+        else {
+          $('.show').append('<h3 class="where"> at ' + show.venue + '</h3>');
+        }
+        if (show.time === "Invalid date") {
+          $('.show').append('<h4 class="when">' + show.date + ' at TBA </h4>');
         }
         if (venue.time != "Invalid date" && venue.name === "Unknown venue") {
           $('.itineraryList').append('<li class="event" data-eventId="' + venue.id + '" id="event-' + venue.id + '"><div class="showArtist">' + venue.artist + '</div><div class="listItem"> at TBA</div><div class="listItem">' + venue.date + '</div><div class="listItem">' + venue.time + '</div><a href="" class="delete">Remove</a></li>');
