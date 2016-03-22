@@ -56,28 +56,28 @@ $(function() {
           }
         }
 
-      var venue = formatShowObj(shows, event, eventIndex);
+      var show = formatShowObj(shows, event, eventIndex);
 
-      function displayShow(venue) {
-        $('.show').html('<a class="who link" href="' + venue.songkick + '<h2 class="who link">' + venue.artist + '</h2></a>');
-        if (venue.name != "Unknown venue") {
-          $('.show').append('<h3 class="where"> at ' + venue.name + '</h3>');
-        } else {
-          $('.show').append('<h3 class="where"> at TBA</h3>');
-        }
-        if (venue.time === "Invalid date") {
-          $('.show').append('<h4 class="when">' + venue.date + ' at TBA </h4>');
-        }
-        if (venue.time != "Invalid date") {
-          $('.show').append('<h4 class="when">' + venue.date + ' at ' + venue.time + '</h4>');
-        }
-      }
+      // function displayShow(show) {
+      //   $('.show').html('<a class="who link" href="' + show.songkick + '<h2 class="who link">' + show.artist + '</h2></a>');
+      //   if (show.name != "Unknown venue") {
+      //     $('.show').append('<h3 class="where"> at ' + show.name + '</h3>');
+      //   } else {
+      //     $('.show').append('<h3 class="where"> at TBA</h3>');
+      //   }
+      //   if (show.time === "Invalid date") {
+      //     $('.show').append('<h4 class="when">' + show.date + ' at TBA </h4>');
+      //   }
+      //   if (show.time != "Invalid date") {
+      //     $('.show').append('<h4 class="when">' + show.date + ' at ' + show.time + '</h4>');
+      //   }
+      // }
 
       function dislikeShow() {
         //removes show from shows array and pushes it to disliked array
         eventIndex++;
-        var venue = formatShowObj(shows, event, eventIndex);
-        displayShow(venue);
+        var show = formatShowObj(shows, event, eventIndex);
+        displayShow(show);
       }
 
       function likeShow() {
@@ -131,41 +131,41 @@ $(function() {
         if (show.time === "Invalid date") {
           $('.show').append('<h4 class="when">' + show.date + ' at TBA </h4>');
         }
-        if (venue.time != "Invalid date" && venue.name === "Unknown venue") {
-          $('.itineraryList').append('<li class="event" data-eventId="' + venue.id + '" id="event-' + venue.id + '"><div class="showArtist">' + venue.artist + '</div><div class="listItem"> at TBA</div><div class="listItem">' + venue.date + '</div><div class="listItem">' + venue.time + '</div><a href="" class="delete">Remove</a></li>');
+        if (show.time != "Invalid date" && show.name === "Unknown venue") {
+          $('.itineraryList').append('<li class="event" data-eventId="' + show.id + '" id="event-' + show.id + '"><div class="showArtist">' + show.artist + '</div><div class="listItem"> at TBA</div><div class="listItem">' + show.date + '</div><div class="listItem">' + show.time + '</div><a href="" class="delete">Remove</a></li>');
           $('.delete').click(function(e) {
             e.preventDefault();
-            $('.event#event-' + venue.id).html('');
+            $('.event#event-' + show.id).html('');
           })
         }
       }
 
-      displayShow(venue); // displays next show in array
+      displayShow(show); // displays next show in array
 
       $('.yes').click(function(evt) {
         likeShow(); // adds the show to the DB and removes current show from array
-        var venue = formatShowObj(shows, event, eventIndex);
+        var show = formatShowObj(shows, event, eventIndex);
         // filter out shows with null values and push to liked array
-        if (venue.name != "Unknown venue" &&
-          venue.lat != null
+        if (show.name != "Unknown show" &&
+          show.lat != null
         )
           {
-            liked.push(venue);
+            liked.push(show);
           }
 
-        displayShow(venue);
+        displayShow(show);
       });
 
       $('.no').click(function(evt) {
         dislikeShow(); // removes current show from array
-        var venue = formatShowObj(shows, event, eventIndex);
-        displayShow(venue); // displays next show in array
+        var show = formatShowObj(shows, event, eventIndex);
+        displayShow(show); // displays next show in array
         //filter out shows with null values and push to disliked array
-        if (venue.name != "Unknown venue" &&
-          venue.lat != null
+        if (show.name != "Unknown venue" &&
+          show.lat != null
         )
           {
-            disliked.push(venue);
+            disliked.push(show);
             // console.log(disliked);
           }
       });
