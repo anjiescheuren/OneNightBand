@@ -1,13 +1,13 @@
 $(function() {
   var myDataRef = new Firebase('https://u7wiyuvlbvi.firebaseio-demo.com/');
   var currentDate = moment().format("YYYY-MM-DD");
-  var dates = ["2016-03-15", "2016-03-16", "2016-03-17", "2016-03-18", "2016-03-19", "2016-03-20"];
+  var dates = ["2016-03-20", "2016-03-21", "2016-03-22"];
 
   for (var i = 0; i < dates.length; i++) {
     var date = dates[i];
     if (date < currentDate) {
     date = dates[i+1];
-    var apiRoot = 'https://api.songkick.com/api/3.0/events.json?location=geo:30.2669444,-97.7427778&per_page=100&min_date=' + date + '&max_date=2016-03-20&apikey=PTAZie3wbuF6n5dx&jsoncallback=?';
+    var apiRoot = 'https://api.songkick.com/api/3.0/events.json?location=geo:30.2669444,-97.7427778&per_page=100&min_date=' + currentDate + '&max_date=2016-03-25&apikey=PTAZie3wbuF6n5dx&jsoncallback=?';
     }
   }
 
