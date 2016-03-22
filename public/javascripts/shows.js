@@ -14,8 +14,8 @@ $(function() {
   var eventIndex = 0;
   var liked = [];
 
-  var ref = new Firebase("https://blinding-torch-1750.firebaseio.com");
-  ref.authWithOAuthPopup("twitter", function(error, authData) {
+  var myDataRef = new Firebase("https://blinding-torch-1750.firebaseio.com");
+  myDataRef.authWithOAuthPopup("twitter", function(error, authData) {
     if (error) {
       console.log("Login Failed!", error);
     } else {
