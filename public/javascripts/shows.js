@@ -7,7 +7,7 @@ $(function() {
     var date = dates[i];
     if (date < currentDate) {
     date = dates[i+1];
-    var apiRoot = 'https://api.songkick.com/api/3.0/events.json';
+    var apiRoot = 'https://api.songkick.com/api/3.0/events.json?location=geo:30.2669444,-97.7427778&per_page=100&min_date=' + currentDate + '&max_date=2016-03-25&apikey=PTAZie3wbuF6n5dx&jsoncallback=?';
     }
   }
 
@@ -26,14 +26,9 @@ $(function() {
   $.ajax({
       url: apiRoot,
       method: "GET",
-      data: {
-        location: 'geo:30.2669444,-97.7427778',
-        per_page: 100,
-        min_date: currentDate,
-        max_date: '2016-03-31',
-        apikey: 'PTAZie3wbuF6n5dx'
-      },
-      dataType: "json"
+      data: {},
+      dataType: "jsonp",
+      jsonCallback: "info"
     })
 
     .done(function(data) {
