@@ -1,5 +1,5 @@
 $(function() {
-  var myDataRef = new Firebase('https://u7wiyuvlbvi.firebaseio-demo.com/');
+
   var currentDate = moment().format("YYYY-MM-DD");
   var dates = ["2016-03-20", "2016-03-21", "2016-03-22"];
 
