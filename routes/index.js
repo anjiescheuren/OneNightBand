@@ -19,8 +19,6 @@ router.post('/', function(req, res, next) {
     var recipient = req.body.to;
     var textMessage = req.body.message;
 
-
-
     //require the Twilio module and create a REST client
     // var client = require('twilio')(accountSid, authToken);
     var client = require('twilio')(accountSid, authToken);

@@ -23,6 +23,31 @@ body {
   height: 80%;
 }
 
+p, .to {
+  color: #00B7FF;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+#to {
+  margin: auto .25em;
+  width: 8em;
+  padding: .1em;
+  color: #FF6B6B;
+  border-style: none;
+  text-align: center;
+}
+
+.submit {
+  margin: .5em auto;
+  background-color: #f4f4f4;
+  color: #FF6B6B;
+  width: 5em;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1.3em;
+  border-radius: 50px;
+}
+
 a {
   color: #00B7FF;
 }
@@ -69,8 +94,8 @@ input {
   border-radius: 12.5px;
   background-color: #e0f6ff;
   padding: 1.5em;
-  padding-bottom: 2em;
-  margin-bottom: 2em;
+  /*padding-bottom: 2em;*/
+  /*margin-bottom: 2em;*/
 }
 .showArtist {
   color: #FF6B6B;
