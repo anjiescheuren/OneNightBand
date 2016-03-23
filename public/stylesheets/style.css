@@ -39,13 +39,29 @@ p, .to {
 }
 
 .submit {
-  margin: .5em auto;
-  background-color: #f4f4f4;
+  margin: .25em auto;
+  background-color: white;
   color: #FF6B6B;
   width: 5em;
   font-family: 'Work Sans', sans-serif;
   font-size: 1.3em;
-  border-radius: 50px;
+  border-style: none;
+}
+
+.infowindow {
+  color: black;
+  font-family: 'Droid Sans', sans-serif;
+  padding: 2px;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 300px;
+}
+
+#artist {
+  color: #06AED5;
+  font-size: 16px;
+  font-weight: bold;
+  padding:0;
 }
 
 a {
@@ -85,7 +101,7 @@ input {
 #listmessage {
   color: #00B7FF;
   font-weight: bold;
-  font-size: 2em;
+  font-size: 1.5em;
   border-radius: 12.5px;
 }
 #listwrap {

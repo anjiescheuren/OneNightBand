@@ -60,7 +60,6 @@ $(function() {
 
       $('.yes').click(function(evt) {
         likeShow(); // shows the modal, adds the show to the DB, and removes current show from array
-        dropMarkers(map, liked);
         var show = formatShowObj(event, eventIndex);
         displayShow(show);
       });
@@ -83,53 +82,75 @@ $(function() {
           var newShow = snapshot.val();
           liked.push(newShow.artist, newShow.venue, newShow.date, newShow.time, newShow.lat, newShow.lng);
           text.push(newShow.artist, newShow.venue, newShow.date, newShow.time);
+
+          $('.itineraryList').html('<div class="showArtist">' + newShow.artist + '</div>');
+
+          // function to place a marker on the map
+          function dropMarkers(map) {
+            for (var i = 0; i < liked.length; i++) {
+              var latlng = new google.maps.LatLng(newShow.lat, newShow.lng);
+              var marker = new google.maps.Marker({
+                position: latlng,
+                icon: 'images/microphone.png',
+                map: map
+              });
+
+              function infoWindowHandler(marker, content) {
+                google.maps.event.addListener(marker, 'click', function(){
+                  var infowindow = new google.maps.InfoWindow({
+                    content: content
+                  });
+                  infowindow.close();
+                  infowindow.open(map, marker);
+                });
+              }
+              var artist = newShow.artist.replace(/\s/g, '');
+              infoWindowHandler(marker, '<a target="blank" id="artist" class="infowindow" href="https://' + artist + '.bandcamp.com"><div class="infowindow" id="artist">' + newShow.artist + '</div></a>' + '<div class="infowindow">' + newShow.venue + '</div>' + '<div class="infowindow">' + moment(newShow.time, "hh:mm:ss a").format("h:mm a") + '</div');
+            }
+          }
+          dropMarkers(map);
         });
         eventIndex++;
 
-        if (show.time === "Invalid date" && show.venue != "Unknown venue") {
-          $('.itineraryList').append('<li class="event" id="' + eventIndex + '"><div class="showArtist">' + show.artist + '</div><div class="listItem"> at ' + show.venue + '</div><div class="listItem">' + show.date + '</div><div class="listItem"> TBA </div><a href="" class="delete">Remove</a></li>');
-          $('.delete').click(function(e) {
-            e.preventDefault();
-            myDataRef.on('child_removed', function(oldChildSnapshot) {
-              var oldShow = oldChildSnapshot.val();
-              oldShow.remove();
-            })
-          })
-        }
-        if (show.time === "Invalid date" && show.venue === "Unknown venue") {
-          $('.itineraryList').append('<li class="event" id="' + eventIndex + '"><div class="showArtist">' + show.artist + '</div><div class="listItem"> at TBA</div><div class="listItem">' + show.date + '</div><div class="listItem"> TBA </div><a href="" class="delete">Remove</a></li>');
-          $('.delete').click(function(e) {
-            e.preventDefault();
-            myDataRef.on('child_removed', function(oldChildSnapshot) {
-              var oldShow = oldChildSnapshot.val().remove();
-              oldShow.remove();
-            })
-          })
-        }
+        // if (show.time === "Invalid date" && show.venue != "Unknown venue") {
+        //   $('.itineraryList').append('<li class="event" id="' + eventIndex + '"><div class="showArtist">' + show.artist + '</div><div class="listItem"> at ' + show.venue + '</div><div class="listItem">' + show.date + '</div><div class="listItem"> TBA </div><a href="" class="delete">Remove</a></li>');
+        //   $('.delete').click(function(e) {
+        //     e.preventDefault();
+        //     myDataRef.on('child_removed', function(oldChildSnapshot) {
+        //       oldChildSnapshot.val().remove();
+        //     })
+        //   })
+        // }
+        // if (show.time === "Invalid date" && show.venue === "Unknown venue") {
+        //   $('.itineraryList').append('<li class="event" id="' + eventIndex + '"><div class="showArtist">' + show.artist + '</div><div class="listItem"> at TBA</div><div class="listItem">' + show.date + '</div><div class="listItem"> TBA </div><a href="" class="delete">Remove</a></li>');
+        //   $('.delete').click(function(e) {
+        //     e.preventDefault();
+        //     myDataRef.on('child_removed', function(oldChildSnapshot) {
+        //       oldChildSnapshot.val().remove();
+        //     })
+        //   })
+        // }
 
-        if (show.time != "Invalid date" && show.venue != "Unknown venue") {
-          $('.itineraryList').append('<li class="event" id="' + eventIndex + '"><div class="showArtist">' + show.artist + '</div><div class="listItem"> at ' + show.venue + '</div><div class="listItem">' + show.date + '</div><div class="listItem">' + show.time + '</div><a href="" class="delete">Remove</a></li>');
-          $('.delete').click(function(e) {
-            e.preventDefault();
-            myDataRef.on('child_removed', function(oldChildSnapshot) {
-              var oldShow = oldChildSnapshot.val();
-              oldShow.remove();
-            })
-          })
-        }
-        if (show.time != "Invalid date" && show.venue === "Unknown venue") {
-          $('.itineraryList').append('<li class="event" id="' + eventIndex + '"><div class="showArtist">' + show.artist + '</div><div class="listItem"> at TBA </div><div class="listItem">' + show.date + '</div><div class="listItem">' + show.time + '</div><a href="" class="delete">Remove</a></li>');
-          $('.delete').click(function(e) {
-            e.preventDefault();
-            myDataRef.on('child_removed', function(oldChildSnapshot) {
-              var oldShow = oldChildSnapshot.val();
-              oldShow.remove();
-            })
-          })
-        }
+        // if (show.time != "Invalid date" && show.venue != "Unknown venue") {
+        //   $('.itineraryList').append('<li class="event" id="' + eventIndex + '"><div class="showArtist">' + show.artist + '</div><div class="listItem"> at ' + show.venue + '</div><div class="listItem">' + show.date + '</div><div class="listItem">' + show.time + '</div><a href="" class="delete">Remove</a></li>');
+        //   $('.delete').click(function(e) {
+        //     e.preventDefault();
+        //     myDataRef.on('child_removed', function(oldChildSnapshot) {
+        //       oldChildSnapshot.val().remove();
+        //     })
+        //   })
+        // }
+        // if (show.time != "Invalid date" && show.venue === "Unknown venue") {
+        //   $('.itineraryList').append('<li class="event" id="' + eventIndex + '"><div class="showArtist">' + show.artist + '</div><div class="listItem"> at TBA </div><div class="listItem">' + show.date + '</div><div class="listItem">' + show.time + '</div><a href="" class="delete">Remove</a></li>');
+        //   $('.delete').click(function(e) {
+        //     e.preventDefault();
+        //     myDataRef.on('child_removed', function(oldChildSnapshot) {
+        //       oldChildSnapshot.val().remove();
+        //     })
+        //   })
+        // }
       console.log(liked);
       }
-
 
       function displayShow(show) {
         $('.show').html('<a class="who link" href="' + show.songkick + '<h2 class="who link">' + show.artist + '</h2></a>');
@@ -151,30 +172,6 @@ $(function() {
     .fail(function(err) {
       if (err) throw err;
     })
-
-    // function to place a marker on the map
-    function dropMarkers(map, liked) {
-      for (var i = 0; i < liked.length; i++) {
-        var latlng = new google.maps.LatLng(liked[i].lat, liked[i].lng);
-        var marker = new google.maps.Marker({
-          position: latlng,
-          icon: 'images/microphone.png',
-          map: map
-        });
-
-        function infoWindowHandler(marker, content) {
-          google.maps.event.addListener(marker, 'click', function(){
-            var infowindow = new google.maps.InfoWindow({
-              content: content
-            });
-            infowindow.close();
-            infowindow.open(map, marker);
-          });
-        }
-        // var artist = liked[i].artist.replace(/\s/g, '');
-        // infoWindowHandler(marker, '<a target="blank" id="artist" class="infowindow" href="https://' + artist + '.bandcamp.com"><div class="infowindow" id="artist">' + venues[i].artist + '</div></a>' + '<div class="infowindow">' + venues[i].name + '</div>' + '<div class="infowindow">' + moment(venues[i].time, "hh:mm:ss").format("h:mm a") + '</div');
-      }
-    }
 
     // function to get user's current location
     function getLocation(map) {
