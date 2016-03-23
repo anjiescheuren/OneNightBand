@@ -12,6 +12,17 @@ body {
   font-family: 'Work Sans', sans-serif;
   font-weight: bold;
 }
+
+#mapholder {
+  max-height: auto%;
+  max-width: 100%;
+  text-align: center;
+  min-width: 200px;
+  width: 50%;
+  min-height: 200px;
+  height: 80%;
+}
+
 a {
   color: #00B7FF;
 }
