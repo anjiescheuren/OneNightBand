@@ -3,6 +3,7 @@ $(function() {
   var map = showMap();
   getLocation(map);
   var liked = [];
+  var text = [];
 
   var myDataRef = new Firebase("https://blinding-torch-1750.firebaseio.com");
   myDataRef.authWithOAuthPopup("twitter", function(error, authData) {
@@ -81,6 +82,7 @@ $(function() {
         myDataRef.on("child_added", function(snapshot, ChildKey) {
           var newShow = snapshot.val();
           liked.push(newShow.artist, newShow.venue, newShow.date, newShow.time, newShow.lat, newShow.lng);
+          text.push(newShow.artist, newShow.venue, newShow.date, newShow.time);
         });
         eventIndex++;
 
