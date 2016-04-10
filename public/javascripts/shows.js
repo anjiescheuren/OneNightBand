@@ -45,6 +45,7 @@ $(function() {
           date: moment(shows[i].start.date, "YYYY-MM-DD").format("dddd, MMMM Do"),
           time: moment(shows[i].start.time, "HH:mm:ss").format("h:mm a"),
           songkick: shows[i].performance[0].artist.uri,
+          venueUri: shows[i].venue.uri,
           lat: shows[i].venue.lat,
           lng: shows[i].venue.lng
         }
@@ -105,7 +106,7 @@ $(function() {
                 });
               }
               var artist = newShow.artist.replace(/\s/g, '');
-              infoWindowHandler(marker, '<a target="blank" id="artist" class="infowindow" href="https://' + artist + '.bandcamp.com"><div class="infowindow" id="artist">' + newShow.artist + '</div></a>' + '<div class="infowindow">' + newShow.venue + '</div>' + '<div class="infowindow">' + moment(newShow.time, "hh:mm:ss a").format("h:mm a") + '</div');
+              infoWindowHandler(marker, '<a target="blank" id="artist" class="infowindow" href="https://' + artist + '.bandcamp.com"><div class="infowindow" id="artist">' + newShow.artist + '</div></a>' + '<div class="infowindow">' + newShow.venue + '</div>' + '<div class="infowindow">' + newShow.date + '<br>' + moment(newShow.time, "hh:mm:ss a").format("h:mm a") + '</div');
             }
           }
           dropMarkers(map);
@@ -153,18 +154,18 @@ $(function() {
       }
 
       function displayShow(show) {
-        $('.show').html('<a class="who link" href="' + show.songkick + '<h2 class="who link">' + show.artist + '</h2></a>');
+        $('.show').html('<a target="blank" class="who link" href="' + show.songkick + '<h2 class="who link">' + show.artist + '</h2></a>');
         if (show.venue === "Unknown venue") {
           $('.show').append('<h3 class="where"> at TBA </h3>');
         }
         else {
-          $('.show').append('<h3 class="where"> at ' + show.venue + '</h3>');
+          $('.show').append('<br><a target="blank" class="where link" href="' + show.venueUri + '"<h3 class="where">' + show.venue + '</h3></a>');
         }
         if (show.time === "Invalid date") {
-          $('.show').append('<h4 class="when">' + show.date + ' at TBA </h4>');
+          $('.show').append('<h4 class="when">' + show.date + '<br>TBA </h4>');
         }
         if (show.time != "Invalid date") {
-          $('.show').append('<h4 class="when">' + show.date + ' at ' + show.time + '</h4>');
+          $('.show').append('<h4 class="when">' + show.date + '<br>' + show.time + '</h4>');
         }
       }
     })
