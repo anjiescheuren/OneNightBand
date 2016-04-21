@@ -7,7 +7,7 @@ $(function() {
     var date = dates[i];
     if (date < currentDate) {
     date = dates[i+1];
-    var apiRoot = 'https://api.songkick.com/api/3.0/events.json?location=geo:30.2669444,-97.7427778&per_page=100&min_date=' + currentDate + '&max_date=2016-04-30&apikey=PTAZie3wbuF6n5dx&jsoncallback=?';
+    var apiRoot = 'https://api.songkick.com/api/3.0/events.json?location=geo:30.2669444,-97.7427778&per_page=100&min_date=' + currentDate + '&max_date=2016-12-31&apikey=PTAZie3wbuF6n5dx&jsoncallback=?';
     }
   }
 
